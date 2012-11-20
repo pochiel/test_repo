@@ -13,8 +13,17 @@ public class boardState
 
    public boolean beAbleToPutHere(int gridx, int gridy)
    {
-	   // TODO: Implement this method
-	   return false;
+	   if(getGrid(gridx,gridy)!=C_COL_NONE){return false;}
+	   if( (getGrid(gridx-1,gridy-1)==C_COL_NONE)&&
+	       (getGrid(gridx,gridy-1)==C_COL_NONE)&&
+		   (getGrid(gridx+1,gridy-1)==C_COL_NONE)&&
+		   (getGrid(gridx-1,gridy)==C_COL_NONE)&&
+		   (getGrid(gridx+1,gridy)==C_COL_NONE)&&
+		   (getGrid(gridx-1,gridy+1)==C_COL_NONE)&&
+		   (getGrid(gridx,gridy+1)==C_COL_NONE)&&
+		   (getGrid(gridx+1,gridy+1)==C_COL_NONE)
+		   ){return false;}
+	   return true;
    }
    
    public int getGrid(int x,int y){
