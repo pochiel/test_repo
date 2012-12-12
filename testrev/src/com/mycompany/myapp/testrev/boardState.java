@@ -11,18 +11,35 @@ public class boardState
 	   b_data=new byte[8][8];
    }
 
+   public boolean equals(Object o){
+	   boardState ao =(boardState)o;
+	   for (int x=0;x<8;x++){
+		   for(int y=0;y<8;y++){
+			   if( ao.getGrid(x,y)!=this.getGrid(x,y) ){
+				   return false;
+			   }
+		   }
+	   }
+	   return true;
+   }
    public boolean beAbleToPutHere(int gridx, int gridy)
    {
+	   int tmpn=0;
+	   if(gridx<0||gridy<0){return false;}
+	   if(gridx>7||gridy>7){return false;}
+	   
 	   if(getGrid(gridx,gridy)!=C_COL_NONE){return false;}
-	   if( (getGrid(gridx-1,gridy-1)==C_COL_NONE)&&
-	       (getGrid(gridx,gridy-1)==C_COL_NONE)&&
-		   (getGrid(gridx+1,gridy-1)==C_COL_NONE)&&
-		   (getGrid(gridx-1,gridy)==C_COL_NONE)&&
-		   (getGrid(gridx+1,gridy)==C_COL_NONE)&&
-		   (getGrid(gridx-1,gridy+1)==C_COL_NONE)&&
-		   (getGrid(gridx,gridy+1)==C_COL_NONE)&&
-		   (getGrid(gridx+1,gridy+1)==C_COL_NONE)
-		   ){return false;}
+	   for(int x=-1;x<2;x++){
+		   for(int y=-1;y<2;y++){
+			   if(y==0&&x==0){continue;}
+			   if((x+gridx<0)||(x+gridx>7)||(y+gridy<0)||(y+gridy>7))
+			   {
+				   continue;
+			   }
+			   tmpn+=getGrid(gridx+x,gridy+y);
+		   }
+	   }
+	   if(tmpn==0){return false;}
 	   return true;
    }
    
