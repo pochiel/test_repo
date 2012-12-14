@@ -81,7 +81,7 @@ class graphView extends View
 		  Log.e("dbg","y="+y+"gy"+(int)((y-C_Y_MIN)/C_G_SIZE));
 		  if( board.getGrid(gridx,gridy) == board.C_COL_NONE )
 		  {
-			  if(board.beAbleToPutHere(gridx,gridy)){
+			  if(board.beAbleToPutHere(gridx,gridy,c)){
 			      board.setGrid(gridx,gridy,c);
 			      return true;
 				  }
