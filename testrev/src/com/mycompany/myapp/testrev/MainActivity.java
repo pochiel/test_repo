@@ -37,14 +37,12 @@ public class MainActivity extends Activity
 			boolean lbret = false;
 			switch(mcTurn){
 				case C_HUMAN_TURN:
-				    dlog("human");
 			        lbret = gv.putBlack((int)(e.getX()),(int)(e.getY()));
 			        lb=gv.getBoardState();
 			        gv.invalidate();
 					if(lbret){mcTurn=revconst.C_CPU_TURN;}
 			        break;
 			    case C_CPU_TURN:
-				    dlog("vpu");
 				    lbret = gv.putWhite((int)(e.getX()),(int)(e.getY()));
 				    lb=gv.getBoardState();
 					//mai.eval(lb,x,y);
@@ -52,9 +50,7 @@ public class MainActivity extends Activity
 					if(lbret){mcTurn=revconst.C_HUMAN_TURN;}
 					break;
 			default:
-			dlog("def");
 			}
-			dlog("a");
 		}
 		return true;
 	}
