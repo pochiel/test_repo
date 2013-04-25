@@ -22,35 +22,33 @@ public class MainActivity extends Activity
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		gv=new graphView(this);
         setContentView(gv);
+		mai=new cAi();
 		}
 	
 	public boolean onTouchEvent(MotionEvent e)
 	{
 		boardState lb;
-		Integer x=0,y=0;
+		CPoint p = new CPoint();
+		
 		if(e.getAction()== e.ACTION_DOWN)
 		{
 			
 		}
 		else if(e.getAction()==e.ACTION_UP)
 		{
-			boolean lbret = false;
-			switch(mcTurn){
-				case C_HUMAN_TURN:
-			        lbret = gv.putBlack((int)(e.getX()),(int)(e.getY()));
-			        lb=gv.getBoardState();
-			        gv.invalidate();
-					if(lbret){mcTurn=revconst.C_CPU_TURN;}
-			        break;
-			    case C_CPU_TURN:
-				    lbret = gv.putWhite((int)(e.getX()),(int)(e.getY()));
-				    lb=gv.getBoardState();
-					//mai.eval(lb,x,y);
+			if(gv.putBlack((int)(e.getX()),(int)(e.getY()))){
+				lb=gv.getBoardState();
+				if(mai.eval(lb,p)){
+					dlog("pass");
+				}
+				else{
+					lb.putGrid(p.getx(),p.gety(),lb.C_COL_WHITE);
+					lb=gv.getBoardState();
 					gv.invalidate();
-					if(lbret){mcTurn=revconst.C_HUMAN_TURN;}
-					break;
-			default:
+				}
 			}
+			gv.invalidate();
+			
 		}
 		return true;
 	}

@@ -35,16 +35,20 @@ public class boardState
 	   return false;
    }
    
-   public boolean beAbleToPutHere(int gridx, int gridy,int aic)
+   public boolean beAbleToPutHere(int gridx, int gridy,int aic){
+	   return ( getRevCountPutHere( gridx,gridy,aic )!=0);
+   }
+   
+   public int getRevCountPutHere(int gridx, int gridy,int aic)
    {
 	   int tmpn=0;
 	   int i=0;
 	   /*out of board*/
-	   if(gridx<0||gridy<0){return false;}
-	   if(gridx>7||gridy>7){return false;}
+	   if(gridx<0||gridy<0){return 0;}
+	   if(gridx>7||gridy>7){return 0;}
 	  
 	   // allready puted
-	   if(getGrid(gridx,gridy)!=C_COL_NONE){return false;}
+	   if(getGrid(gridx,gridy)!=C_COL_NONE){return 0;}
 	   
 	   // nothing around here
 	   for(int x=-1;x<2;x++){
@@ -59,7 +63,7 @@ public class boardState
 		   }
 	   }
 	   if(tmpn==0){
-		  return false;}
+		  return 0;}
 	   tmpn=0;
 	   
 	   // Check reversible to right side
@@ -173,8 +177,7 @@ public class boardState
 		   }
 	   }
 	   
-	   if(tmpn==0){return false;}
-	   return true;
+	   return tmpn;
    }
    
 	public void putGrid(int gridx,int gridy,int aic)
